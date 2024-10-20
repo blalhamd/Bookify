@@ -1,7 +1,4 @@
-﻿using Bookify.DataAccess.Seed;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Bookify.DataAccess.Data.EntitiesConfig
+﻿namespace Bookify.DataAccess.Data.EntitiesConfig
 {
 	public class CategoryConfig : IEntityTypeConfiguration<Category>
 	{

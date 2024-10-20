@@ -4,6 +4,6 @@
 	{
 		public string Name { get; set; } = null!;
         public string Nationality { get; set; } = null!;
-        public ICollection<Book> books { get; set; } = new List<Book>(); 
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
     }
 }

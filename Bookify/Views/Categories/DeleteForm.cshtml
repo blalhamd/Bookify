@@ -1,0 +1,38 @@
+﻿@model CategoryViewModel
+
+@{
+	ViewData["Title"] = "Delete Category";
+}
+
+<div class="row p-4">
+
+	<div class="col-3" style="background:#eee;"></div>
+
+	<div class="col-9">
+		<div class="card">
+			<div class="card-header">
+				<h6 class="card-title my-2">Confirm Delete</h6>
+			</div>
+			<div class="card-body">
+				<form method="post" asp-action="Delete" asp-controller="Categories" asp-route-id="@Model.Id">
+					<div class="form-group my-2">
+						<input type="text" asp-for="Name" class="form-control my-2" placeholder="Name..." />
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<button type="submit" class="btn btn-danger d-block ms-auto my-2">
+							<i class="bi bi-check-lg"></i> Delete
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<img src="~/assets/images/k.png" class="rounded d-block mx-auto w-50"/>
+		<img src="~/assets/images/k.png" height="200" width="200" class="d-block ms-auto"/>
+	</div>
+</div>

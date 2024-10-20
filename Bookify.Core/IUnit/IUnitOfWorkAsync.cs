@@ -1,10 +1,10 @@
-﻿using Bookify.Core.IRepositories.Non_Generic;
-
-namespace Bookify.Core.IUnit
+﻿namespace Bookify.Core.IUnit
 {
 	public interface IUnitOfWorkAsync : IAsyncDisposable
 	{
 		ICategoryRepositoryAsync _CategoryRepositoryAsync { get; }
+		IAuthorRepositoryAsync _AuthorRepositoryAsync { get; }
+		IBookRepositoryAsync _BookRepositoryAsync { get; }
 		Task<int> Save();
 	}
 }

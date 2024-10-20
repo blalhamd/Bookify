@@ -1,6 +1,4 @@
-﻿using Bookify.Entities.entities.Base;
-
-namespace Bookify.Core.IRepositories.Generic
+﻿namespace Bookify.Core.IRepositories.Generic
 {
 	public interface IGenericRepositoryAsync<T> where T : BaseEntity
 	{

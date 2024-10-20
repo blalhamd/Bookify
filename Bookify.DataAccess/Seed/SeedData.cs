@@ -26,5 +26,19 @@
 				}
 			};
 		}
+
+		public static IEnumerable<Author> LoadAuthors()
+		{
+			return new List<Author>() { };
+		}
+
+		public static IEnumerable<Book> LoadBooks()
+		{
+			return new List<Book>() { };
+		}
+		public static IEnumerable<BookCategory> LoadBookCategory()
+		{
+			return new List<BookCategory>() { };
+		}
 	}
 }

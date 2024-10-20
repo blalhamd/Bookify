@@ -1,16 +1,4 @@
-﻿using Bookify.Business.Services;
-using Bookify.Core.AutoMapper;
-using Bookify.Core.IRepositories.Generic;
-using Bookify.Core.IServices;
-using Bookify.Core.IUnit;
-using Bookify.DataAccess.Data.Context;
-using Bookify.DataAccess.Repositories.Generic;
-using Bookify.DataAccess.Unit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Bookify.DependencyInjection
+﻿namespace Bookify.DependencyInjection
 {
 	public static class Container
 	{
@@ -43,6 +31,8 @@ namespace Bookify.DependencyInjection
 		private static IServiceCollection RegisterServices(this IServiceCollection services)
 		{
 			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IBookService, BookService>();
+			services.AddScoped<IBookService, AuthorService>();
 
 			return services;
 		}

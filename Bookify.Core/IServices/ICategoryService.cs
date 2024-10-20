@@ -1,7 +1,4 @@
-﻿using Bookify.Core.ViewModels.Category.Requests;
-using Bookify.Core.ViewModels.Category.Responses;
-
-namespace Bookify.Core.IServices
+﻿namespace Bookify.Core.IServices
 {
 	public interface ICategoryService
 	{

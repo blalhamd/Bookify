@@ -1,2 +1,11 @@
 ﻿global using Bookify.Entities.entities;
 global using Microsoft.EntityFrameworkCore;
+global using Bookify.DataAccess.Seed;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Bookify.Core.IRepositories.Generic;
+global using Bookify.DataAccess.Data.Context;
+global using Bookify.Entities.entities.Base;
+global using Bookify.Core.IRepositories.Non_Generic;
+global using Bookify.DataAccess.Repositories.Generic;
+global using Bookify.Core.IUnit;
+global using Bookify.DataAccess.Repositories.Non_Generic;

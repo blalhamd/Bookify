@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using Bookify.Core.IServices;
-using Bookify.Core.IUnit;
-using Bookify.Core.ViewModels.Category.Requests;
-using Bookify.Core.ViewModels.Category.Responses;
-using Bookify.Entities.entities;
-
-namespace Bookify.Business.Services
+﻿namespace Bookify.Business.Services
 {
 	public class CategoryService : ICategoryService
 	{
@@ -70,6 +63,7 @@ namespace Bookify.Business.Services
 				throw new Exception();
 
 			await _unitOfWork._CategoryRepositoryAsync.DeleteAsync(category);
+			await _unitOfWork.Save();
 		}
 
 	}

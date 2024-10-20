@@ -1,8 +1,4 @@
-﻿using Bookify.Core.IRepositories.Generic;
-using Bookify.DataAccess.Data.Context;
-using Bookify.Entities.entities.Base;
-
-namespace Bookify.DataAccess.Repositories.Generic
+﻿namespace Bookify.DataAccess.Repositories.Generic
 {
 	public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : BaseEntity
 	{

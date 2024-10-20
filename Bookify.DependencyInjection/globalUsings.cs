@@ -1,1 +1,12 @@
-﻿
+﻿global using Bookify.Business.Services;
+global using Bookify.Core.AutoMapper;
+global using Bookify.Core.IRepositories.Generic;
+global using Bookify.Core.IServices;
+global using Bookify.Core.IUnit;
+global using Bookify.DataAccess.Data.Context;
+global using Bookify.DataAccess.Repositories.Generic;
+global using Bookify.DataAccess.Unit;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Authorify.Business.Services;
