@@ -1,0 +1,12 @@
+﻿@model List<Employee>
+
+@foreach (var item in Model)
+{
+	<partial name="_testPartial" model="@item"/>
+}
+
+<div class="row my-2" style="height:80px; background:#eee">
+	<div class="col-4 bg-danger align-self-start">One</div>
+	<div class="col-4 bg-primary align-self-center">Two</div>
+	<div class="col-4 bg-success align-self-end">Three</div>
+</div>
