@@ -1,0 +1,170 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+* {
+    font-family: "Encode Sans Expanded", sans-serif;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+.Description-link,
+.Copies-link {
+    text-decoration: none;
+    color: #a89e9e;
+    font-size: large;
+    font-weight: bold;
+}
+
+.active {
+    color: blue;
+    text-decoration: underline;
+}
+
+.Description-link:focus,
+.Copies-link:focus {
+    color: blue;
+    text-decoration: underline;
+}
+
+.active:focus {
+    color: white !important;
+    border-style: none;
+    background: blue;
+    border-radius: 0px;
+}
+
+.haeder-manage-font {
+    font-family: system-ui;
+    font-weight: bold;
+}
+
+/* Placeholder style */
+.form-control::placeholder {
+    transition: transform 0.2s ease, font-size 0.2s ease;
+    transform-origin: left bottom;
+}
+
+/* Placeholder becomes smaller on focus */
+.form-control:focus::placeholder {
+    transform: translateY(-10px) scale(0.8);
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+#aside-section {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#main-content {
+    overflow-y: auto;
+}
+
+#dash-main-image {
+    max-height: 260px;
+    width: 100%;
+    border-radius: 15px;
+}
+
+/* Custom Card Styling */
+.custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+    .custom-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border: 1px solid green;
+    }
+
+/* Image Styling for Equal Height */
+.custom-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.glass {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: absolute;
+    top: 20%;
+    left: 50px;
+    padding: 30px;
+}
+
+#bookify {
+    font-family: "Satisfy", cursive;
+    font-weight: bold
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+    margin: 20px;
+}
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+    }
+
+#btn {
+    position: absolute;
+    bottom: -50px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+#side {
+    background-color: #3459e6;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#side h5 {
+  color: white;
+}
+
+#Search {
+    text-decoration:none;
+    color: white;
+}
+
+
+.suggest:not(:last-child) {
+   border-bottom: 1px solid #dcdcdc;
+}

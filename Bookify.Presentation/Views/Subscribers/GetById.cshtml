@@ -1,0 +1,110 @@
+﻿@model SubscriberViewModel
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<div class="row p-4 my-2">
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th></th>
+					<th>Image</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Gender</th>
+					<th>Date of Birth</th>
+					<th>National ID</th>
+					<th>Has WhatsApp</th>
+					<th>Area</th>
+					<th>Governorate</th>
+					<th>Address</th>
+					<th>Is Blacklisted</th>
+					<th>Number Of Rentals</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>
+						<img src="~/assets/images/@Model.ImageUrl" alt="Image" style="max-width: 50px; max-height: 50px; border-radius: 80%;" />
+					</td>
+					<td>@Model.FirstName</td>
+					<td>@Model.LastName</td>
+					<td>@Model.Phone</td>
+					<td>@Model.Email</td>
+					<td>@Model.Gender</td>
+					<td>@Model.DateOfBirth.ToShortDateString()</td>
+					<td>@Model.NationalId</td>
+					<td>@(Model.HasWhatsApp ? "Yes" : "No")</td>
+					<td>@Model.AreaName</td>
+					<td>@Model.GovernorateName</td>
+					<td>@Model.Address</td>
+					<td>@(Model.IsBlackListed ? "Yes" : "No")</td>
+					<td>@Model.rentals.Sum(x=> x.NumberOfRentalCopies)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<hr />
+<h4 class="text-center my-2 fw-bold">Subsrctions For @Model.FirstName</h4>
+@if (!Model.IsBlackListed)
+{
+	<div class="col-12 text-end  my-2">
+		<a href="javascript:;" class="btn btn-success Add-new-renew" data-id="@Model.Id">Add New Subscription</a>
+	</div>
+}
+<div class="row p-4 my-2">
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th></th>
+					<th>ID</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Status</th>
+					<th>Created On</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var sub in Model.subscriptions)
+				{
+				<tr>
+					<td></td>
+					<td>@sub.Id</td>
+					<td>@sub.StartDate.ToShortDateString()</td>
+					<td>@sub.EndDate.ToShortDateString()</td>
+						<td>
+							@if (!string.IsNullOrEmpty(sub.Status))
+							{
+								<span class="badge bg-@(sub.Status == "Expired" ? "warning" : "success")">@sub.Status</span>
+							}
+						</td>
+					<td>@sub.CreationTime</td>
+					<td></td>
+				</tr>
+				}		
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@if(TempData["successmessage"] is not null)
+{
+	@section Scripts {
+		<script>
+			SweetAlertMessage('@TempData["successmessage"]');
+		</script>
+	}
+}
+
+@section Scripts2 {
+	<script src="~/js/subscriber.js" asp-append-version="true"></script>
+}

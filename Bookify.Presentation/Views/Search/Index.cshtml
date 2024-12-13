@@ -1,0 +1,27 @@
+﻿
+@section Styles {
+	<link href="~/css/examples.css" rel="stylesheet" />
+}
+
+<div class="container">
+	<div class="row d-flex justify-content-between  p-4">
+		<div class="col-md-5 col-12 my-2">
+			<img src="~/assets/images/Web search-bro.png" alt="search" width="100%" height="250" />
+		</div>
+		<div class="col-md-5 col-12 align-self-center">
+			<h5 class="my-2" id="head">Find a Book</h5>
+			<div id="remote">
+				<input type="text" placeholder="Find By Book Name Or Author Name..." class="form-control typeahead my-2" />
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="~/lib/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="~/lib/handlebars.js/handlebars.min.js"></script>
+}
+
+@section Scripts2{
+  <script src="~/js/search.js" asp-append-version="true"></script>
+}

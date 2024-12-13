@@ -2,7 +2,8 @@
 {
 	public class CategoryViewModel
 	{
-        public int Id { get; set; }
-		public string Name { get; set; } = null!;
-	}
+        public string Id { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public bool IsDeleted { get; set; }
+    }
 }

@@ -1,0 +1,41 @@
+﻿@model IList<AuthorViewModel>
+
+@{
+	ViewData["Title"] = "Authors";
+}
+
+<div class="row p-4">
+	<div class="col-12">
+        <table class="table table-responsive table-hover table-borderless table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Nationality</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Nationality</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+	</div>
+</div>
+
+@section Scripts {
+    <script>
+        ApplyDataTables();
+    </script>
+}
+
+@section CustomScripts {
+    <partial name="_DataTablesJsScriptsPartial" />
+}

@@ -1,0 +1,105 @@
+﻿@model BookViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row card p-4 mb-3">
+    <div class="col-12">
+        <div class="row p-4">
+            <div class="col-md-4 col-12">
+                <img src="~/assets/images/@Model.ImageUrl" class="img-fluid h-100 rounded-start" alt="@Model.Title" style="object-fit: cover" />
+            </div>
+            <div class="col-md-8 col-12">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text"><strong>Price:</strong> @Model.Price</p>
+                    <p class="card-text"><strong>Author:</strong> @Model.AuthorName</p>
+                    <p class="card-text"><strong>Publisher:</strong> @Model.Publisher</p>
+                    <p class="card-text"><strong>Published On:</strong> @Model.PublishedOn.ToString("yyyy-MM-dd")</p>
+                    <p class="card-text"><strong>Hall:</strong> @Model.Hall</p>
+                    <p class="card-text"><strong>Available for Rental:</strong> @Model.IsAvailableForRental</p>
+                    <p class="card-text"><strong>Type:</strong> @Model.Type</p>
+                    <p class="card-text"><strong>Copies:</strong> @Model.BookCopies.Count()</p>
+                    <p class="card-text"><strong>Categories:</strong> @string.Join(" - ", Model.SelectedCategories!)</p>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" asp-controller="Books" class="btn btn-warning my-2">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="d-flex gap-2">
+            <a href="#" class="my-2 Description-link">Description</a>
+            <a href="#" class="my-2 Copies-link">Copies</a>
+        </div>
+    </div>
+</div>
+
+<div class="row card p-4 mt-2">
+    <div class="col-12 js-table">
+        <!--Displaying Copies and description-->
+        @if (Model.BookCopies.Count() > 0)
+        {
+            <table class="table table-hover table-responsive table-borderless table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th>Is Available For Rental?</th>
+                        <th></th>
+                        <th>Edition Number</th>
+                        <th></th>
+                        <th>Serial Number</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var copy in Model.BookCopies)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@copy.Title</td>
+                            <td>
+                                @if (!copy.IsDeleted)
+                                {
+                                    <span class="badge bg-success js-status">Available</span>
+                                }else
+                                {
+                                    <span class="badge bg-danger js-status">Deleted</span>
+                                }
+                            </td>
+                            <td></td>
+                            <td>@copy.IsAvailableForRental</td>
+                            <td></td>
+                            <td>@copy.EditionNumber</td>
+                            <td></td>
+                            <td>@copy.SerialNumber</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <h4 class="alert-heading">Warning!</h4>
+                <p class="mb-0">Not Exist Copies For That Book <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+            </div>
+        }
+    </div>
+    <div class="col-12 js-des d-none">@Model.Description</div>
+</div>
+
+<!--AntiForignToken-->
+@Html.AntiForgeryToken()
+
+<!-- Ajax && JQuery-->
+@section Scripts {
+    <script src="~/js/book.js" asp-append-version="true"></script>
+}

@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify", "Bookify\Bookify.csproj", "{0F111C25-CDD7-4EED-931F-E532F459557B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Entities", "Bookify.Entities\Bookify.Entities.csproj", "{1796F6BE-3A3E-43DF-9885-E7E9A99D85C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Entities", "Bookify.Entities\Bookify.Entities.csproj", "{1796F6BE-3A3E-43DF-9885-E7E9A99D85C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Core", "Bookify.Core\Bookify.Core.csproj", "{09B52ED7-878A-45CC-BA88-059A5E37C344}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Core", "Bookify.Core\Bookify.Core.csproj", "{09B52ED7-878A-45CC-BA88-059A5E37C344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.DataAccess", "Bookify.DataAccess\Bookify.DataAccess.csproj", "{CC17AF5F-4B9A-499E-8D08-234B6A429643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.DataAccess", "Bookify.DataAccess\Bookify.DataAccess.csproj", "{CC17AF5F-4B9A-499E-8D08-234B6A429643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Shared", "Bookify.Shared\Bookify.Shared.csproj", "{35BBF13A-AC2A-454A-AF64-4DDE6812FAF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Shared", "Bookify.Shared\Bookify.Shared.csproj", "{35BBF13A-AC2A-454A-AF64-4DDE6812FAF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.Business", "Bookify.Business\Bookify.Business.csproj", "{EAA92769-CA7A-4461-8725-F6DE0FEC7851}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Business", "Bookify.Business\Bookify.Business.csproj", "{EAA92769-CA7A-4461-8725-F6DE0FEC7851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookify.DependencyInjection", "Bookify.DependencyInjection\Bookify.DependencyInjection.csproj", "{F0C9BB33-91FC-4BCC-8A71-CC26AFFB2485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.DependencyInjection", "Bookify.DependencyInjection\Bookify.DependencyInjection.csproj", "{F0C9BB33-91FC-4BCC-8A71-CC26AFFB2485}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Presentation", "Bookify.Presentation\Bookify.Presentation.csproj", "{F2AEE88D-848F-43CB-B709-EE024FCF124B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0F111C25-CDD7-4EED-931F-E532F459557B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F111C25-CDD7-4EED-931F-E532F459557B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F111C25-CDD7-4EED-931F-E532F459557B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F111C25-CDD7-4EED-931F-E532F459557B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1796F6BE-3A3E-43DF-9885-E7E9A99D85C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1796F6BE-3A3E-43DF-9885-E7E9A99D85C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1796F6BE-3A3E-43DF-9885-E7E9A99D85C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{F0C9BB33-91FC-4BCC-8A71-CC26AFFB2485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0C9BB33-91FC-4BCC-8A71-CC26AFFB2485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0C9BB33-91FC-4BCC-8A71-CC26AFFB2485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2AEE88D-848F-43CB-B709-EE024FCF124B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AEE88D-848F-43CB-B709-EE024FCF124B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AEE88D-848F-43CB-B709-EE024FCF124B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AEE88D-848F-43CB-B709-EE024FCF124B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

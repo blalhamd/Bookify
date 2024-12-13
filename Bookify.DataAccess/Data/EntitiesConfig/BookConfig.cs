@@ -8,6 +8,12 @@
 
 			builder.HasIndex(x => new { x.Title, x.AuthorId }).IsUnique();
 
+			builder.Property(x => x.Type).HasConversion
+				(
+					x => x.ToString(),
+				   	x => (BookType)Enum.Parse(typeof(BookType), x)
+				);
+
 			builder.HasData(SeedData.LoadBooks());
 		}
 	}

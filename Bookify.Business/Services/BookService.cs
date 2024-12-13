@@ -3,28 +3,31 @@
 	public class BookService : IBookService
 	{
 		private readonly IUnitOfWorkAsync _unitOfWork;
+		private readonly IImageService _ImageService;
 		private readonly IMapper _mapper;
-		public BookService(IUnitOfWorkAsync unitOfWork, IMapper mapper)
+
+		public BookService(IUnitOfWorkAsync unitOfWork, IImageService imageService, IMapper mapper)
 		{
 			_unitOfWork = unitOfWork;
+			_ImageService = imageService;
 			_mapper = mapper;
 		}
 
 		public async Task<IList<BookViewModel>> GetAllAsync()
 		{
-			var categories = await _unitOfWork._BookRepositoryAsync.GetAllAsync();
+			var books = await _unitOfWork._BookRepositoryAsync.GetAllAsync(["Author", "Categories.Category"]);
 
-			if (categories is null)
+			if (books is null)
 				throw new Exception();
 
-			var categoriesVm = _mapper.Map<IList<BookViewModel>>(categories);
+			var categoriesVm = _mapper.Map<IList<BookViewModel>>(books);
 
 			return categoriesVm;
 		}
 
 		public async Task<BookViewModel> GetByIdAsync(int id)
 		{
-			var Book = await _unitOfWork._BookRepositoryAsync.GetByIdAsync(id);
+			var Book = await _unitOfWork._BookRepositoryAsync.GetByIdAsync(id, ["Author", "Copies", "Categories.Category"]);
 
 			if (Book is null)
 				throw new Exception();
@@ -38,28 +41,27 @@
 		{
 			var Book = _mapper.Map<Book>(model);
 
+			var image = await _ImageService.getUniqueNameFile(model.ImageUrl!);
+			Book.ImageUrl = image;
+
 			await _unitOfWork._BookRepositoryAsync.AddAsync(Book);
 			await _unitOfWork.Save();
 		}
 		
 		public async Task UpdateAsync(int id, CreateBookViewModel model)
 		{
-			var book = await _unitOfWork._BookRepositoryAsync.GetByIdAsync(id);
+			var existingBook = await _unitOfWork._BookRepositoryAsync.GetByIdAsync(id, ["Categories.Category"]);
 
-			if (book is null)
+			if (existingBook is null)
 				throw new Exception();
 
-			book.Title = model.Title;
-			book.Description = model.Description;
-			book.Price = model.Price;
-			book.AuthorId = model.AuthorId;
-			book.Publisher = model.Publisher;
-			book.PublishedOn = model.PublishedOn;
-			book.Hall = model.Hall;
-			book.ImageUrl = model.ImageUrl;
-			book.IsAvailableForRental = model.IsAvailableForRental;
+			var oldPath = existingBook.ImageUrl;
 
-			await _unitOfWork._BookRepositoryAsync.UpdateAsync(book);
+			var updatedBook = _mapper.Map(model, existingBook);
+
+			updatedBook.ImageUrl = await _ImageService.getUniqueNameFile(model.ImageUrl!, true, oldPath!);
+
+			await _unitOfWork._BookRepositoryAsync.UpdateAsync(updatedBook);
 			await _unitOfWork.Save();
 		}
 
@@ -70,9 +72,33 @@
 			if (Book is null)
 				throw new Exception();
 
+			var oldPath = Book.ImageUrl;
+
+			await _ImageService.getUniqueNameFile(true, oldPath!);
 			await _unitOfWork._BookRepositoryAsync.DeleteAsync(Book);
 			await _unitOfWork.Save();
 		}
 
-	}
+		public async Task<IList<BookViewModel>?> GetLastEightBooks()
+		{
+			var query = await _unitOfWork._BookRepositoryAsync.GetLastEightBooks();
+
+			if (query is null)
+				return null!;
+
+			var bookModels = _mapper.Map<IList<BookViewModel>>(query);
+
+			return bookModels!;
+        }
+
+        public async Task<IList<BookSearchResult>> FindAsync(string searchTerm)
+        {
+			var books = await _unitOfWork._BookRepositoryAsync.FindAsync(searchTerm);
+
+			if(books is null)
+				return new List<BookSearchResult>(); // as empty
+
+			return books;
+        }
+    }
 }

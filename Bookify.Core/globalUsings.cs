@@ -11,3 +11,23 @@ global using Bookify.Core.ViewModels.Author.Requests;
 global using Bookify.Core.ViewModels.Author.Responses;
 global using Bookify.Core.ViewModels.Book.Requests;
 global using Bookify.Core.ViewModels.Book.Responses;
+global using System.Linq.Expressions;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Bookify.Core.ViewModels.BookCopy.Responses;
+global using Bookify.Core.ViewModels.BookCopy.Requests;
+global using Bookify.Core.ViewModels.User.Requests;
+global using Bookify.Core.ViewModels.User.Responses;
+global using Bookify.Entities.entities.Identity;
+global using Bookify.Core.ViewModels.Subscriber.Requests;
+global using Bookify.Core.ViewModels.Subscriber.Responses;
+global using Bookify.Core.ViewModels.Governorate;
+global using Bookify.Core.ViewModels.Area.Responses;
+global using Bookify.Entities.Enums;
+global using Bookify.Core.ViewModels.Subscription.Responses;
+global using Bookify.Core.ViewModels.RentalCopy.Responses;
+global using Bookify.Core.ViewModels.Rental.Responses;
+global using Bookify.Core.ViewModels.Dashboard.Responses;
+
+

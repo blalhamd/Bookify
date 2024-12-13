@@ -1,0 +1,149 @@
+﻿@model SubscriberViewModel
+
+<div class="row card p-4">
+    <form asp-action="Edit" method="post" asp-route-id="@Model.Id" enctype="multipart/form-data">
+        <div class="row">
+            <!-- First Name and Last Name -->
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <input asp-for="FirstName" class="form-control my-2" placeholder="First Name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <input asp-for="LastName" class="form-control my-2" placeholder="Last Name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Date of Birth -->
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <input asp-for="DateOfBirth" class="form-control my-2" type="date" placeholder="Date of Birth" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+            </div>
+            <!--Gender-->
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <select asp-for="Gender" class="form-control my-2">
+                        <option value="" disabled selected>-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- National ID -->
+            <div class="col-12">
+                <div class="form-group my-2">
+                    <input asp-for="NationalId" class="form-control my-2" placeholder="National ID" />
+                    <span asp-validation-for="NationalId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Email, Phone, and Has WhatsApp -->
+            <div class="col-md-4 col-12">
+                <div class="form-group my-2">
+                    <input asp-for="Email" class="form-control my-2" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group my-2">
+                    <input asp-for="Phone" class="form-control my-2" placeholder="Phone" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group my-2 form-check">
+                    <input asp-for="HasWhatsApp" class="form-check-input" type="checkbox" />
+                    <label asp-for="HasWhatsApp" class="form-check-label">Has WhatsApp</label>
+                    <span asp-validation-for="HasWhatsApp" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Governorate and Area -->
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <select name="GovernorateId" class="form-select form-control my-2">
+                        <option value="">-- Select Governorate --</option>
+                        @foreach (var item in Model.Governorates!)
+                        {
+                            if(item.Text == Model.GovernorateName)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="GovernorateName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group my-2">
+                    <select name="AreaId" class="form-select form-control my-2" aria-label="Default select example">
+                        <option value="">-- Select Area --</option>
+                        @foreach (var item in Model.Areas!)
+                        {
+                            if (item.Text == Model.AreaName)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="AreaName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Address -->
+            <div class="col-12">
+                <div class="form-group my-2">
+                    <textarea asp-for="Address" class="form-control my-2" placeholder="Address"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Image Upload -->
+            <div class="col-12">
+                <div class="form-group my-2">
+                    <input asp-for="ImageUrl" class="form-control my-2" type="file" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Submit Button -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary my-2">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

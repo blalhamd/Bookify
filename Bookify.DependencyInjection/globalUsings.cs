@@ -10,3 +10,8 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Authorify.Business.Services;
+global using Bookify.Entities.entities.Identity;
+global using Microsoft.AspNetCore.Identity;
+global using Bookify.Business.Services.Email;
+global using Microsoft.AspNetCore.Identity.UI.Services;
+global using Microsoft.AspNetCore.DataProtection;

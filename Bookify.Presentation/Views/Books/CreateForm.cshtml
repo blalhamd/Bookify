@@ -1,0 +1,149 @@
+﻿@model CreateBookViewModel
+
+@{
+	ViewData["Title"] = "Add New Book";
+}
+
+<div class="row p-4">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="text-center my-2">Create New Book</h5>
+			</div>
+			<div class="card-body">
+				<form asp-action="Create" asp-controller="Books" method="post" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<div class="form-group my-2">
+								<input type="text" asp-for="Title" class="form-control my-2" placeholder="Title" />
+								<span asp-validation-for="Title" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-6 col-12">
+							<div class="form-group my-2">
+								<input type="text" asp-for="Description" class="form-control my-2" placeholder="Description" />
+								<span asp-validation-for="Description" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4 col-12">
+							<div class="form-group my-2">
+								<input type="number" asp-for="Price" class="form-control my-2" placeholder="Price" />
+								<span asp-validation-for="Price" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4 col-12">
+							<div class="form-group my-2">
+								<input type="text" asp-for="Publisher" class="form-control my-2" placeholder="Publisher" />
+								<span asp-validation-for="Publisher" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4 col-12">
+							<div class="form-group my-2">
+								<input type="date" asp-for="PublishedOn" class="form-control js-flatpickr my-2" placeholder="PublishedOn" />
+								<span asp-validation-for="PublishedOn" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-8 col-12">
+							<div class="form-group my-2">
+								<input type="file" asp-for="ImageUrl" class="form-control my-2" placeholder="Image" />
+								<span asp-validation-for="ImageUrl" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4 col-12">
+							<div class="form-group my-2">
+								<input type="text" asp-for="Type" class="form-control my-2" placeholder="Type" />
+								<span asp-validation-for="Type" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4 col-12">
+							<div class="form-group my-2">
+								<input type="text" asp-for="Hall" class="form-control my-2" placeholder="Hall" />
+								<span asp-validation-for="Hall" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-8 col-12">
+							<div class="form-group my-2">
+								<select asp-items="@Model.Authors" asp-for="AuthorId" class="form-select js-select2" aria-label="Default select example">
+									<option value="0" selected>-- select Author --</option>
+									@foreach (var item in Model.Authors!)
+									{
+										<option value="@item.Value">@item.Text</option>
+									}
+								</select>
+								<span asp-validation-for="AuthorId" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<div class="form-group d-flex justify-content-between my-2">
+								<!--Make it Rdio -->
+								<label class="form-label">Is Available For Rental</label>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="IsAvailableForRental" id="flexRadioDefault1" value="true">
+									<label class="form-check-label" for="flexRadioDefault1">
+										Yes
+									</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="IsAvailableForRental" id="flexRadioDefault2" value="false" checked>
+									<label class="form-check-label" for="flexRadioDefault2">
+										No
+									</label>
+								</div>
+								<span asp-validation-for="IsAvailableForRental" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group my-2">
+								<h5>Select Categories</h5>
+								<div class="row">
+									@foreach (var category in Model.Categories!)
+									{
+										<div class="col-md-4">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" name="SelectedCategories" id="category-@category.Value" value="@category.Value">
+												<label class="form-check-label" for="category-@category.Value">@category.Text</label>
+											</div>
+										</div>
+									}
+								</div>
+								<span asp-validation-for="@Model.SelectedCategories" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<input type="submit" value="Save" class="btn btn-primary d-block ms-auto my-2" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+		$(document).ready(function(){
+			ApplySelect2();
+		    ApplyflatPickr();
+		})
+	</script>
+}

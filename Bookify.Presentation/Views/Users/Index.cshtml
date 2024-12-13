@@ -1,0 +1,91 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="row p-4">
+    <div class="col-12 p-4 text-end">
+        <a asp-action="Create" asp-controller="Users" class="btn btn-primary my-3">Add New User</a>
+    </div>
+    <div class="col-12">
+        <table class="table table-responsive table-hover table-borderless table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Full Name</th>
+                    <th></th>
+                    <th scope="col">User Name</th>
+                    <th></th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row"></td>
+                        <td>@item.Id</td>
+                        <td>@string.Join(" ",[item.FirstName,item.LastName])</td>
+                        <td></td>
+                        <td>@item.UserName</td>
+                        <td></td>
+                        <td>@item.Email</td>
+						<td>
+							@if (!item.IsDeleted)
+							{
+								<span class="badge bg-success js-status">Available</span>
+							}
+							else
+							{
+								<span class="badge bg-danger js-status">Deleted</span>
+							}
+						</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Edit" asp-controller="Users" asp-route-email="@item.Email"><i class="bi bi-box-arrow-in-down-left"></i> Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="ResetPasswordForm" asp-controller="Users" asp-route-id="@item.Id"><i class="bi bi-box-arrow-in-down-left"></i> Reset Password</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="UnLockUser" asp-controller="Users" asp-route-email="@item.Email"><i class="bi bi-unlock"></i> UnLock</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item js-toggle-status" data-url="/Users/ToggleStatus/@item.Id"><i class="bi bi-trash-fill"></i> Toggle Status</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.AntiForgeryToken();
+
+@section Scripts {
+    <script>
+         $(document).ready(function () {
+            ApplyDataTables();
+            SweetAlertMessage('@TempData["successmessage"]');
+        })
+    </script>
+}
+
+
+@section CustomScripts {
+    <partial name="_DataTablesJsScriptsPartial" />
+}

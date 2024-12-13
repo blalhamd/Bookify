@@ -6,6 +6,8 @@
 		{
 			builder.ToTable("Categories").HasKey(x=> x.Id);
 
+			builder.HasIndex(x => x.Name).IsUnique();
+
 			builder.HasData(SeedData.LoadCategories());
 		}
 	}

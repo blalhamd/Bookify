@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "apexcharts@4.1.0",
+      "destination": "wwwroot/lib/apexcharts/",
+      "files": [
+        "apexcharts.min.js",
+        "apexcharts.min.css"
+      ]
+    },
+    {
+      "library": "typeahead.js@0.11.1",
+      "destination": "wwwroot/lib/typeahead.js/",
+      "files": [
+        "typeahead.bundle.min.js"
+      ]
+    },
+    {
+      "library": "handlebars.js@4.7.8",
+      "destination": "wwwroot/lib/handlebars.js/",
+      "files": [
+        "handlebars.min.js"
+      ]
+    }
+  ]
+}

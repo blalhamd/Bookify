@@ -14,5 +14,6 @@
 		public int AuthorId { get; set; }
 		public Author Author { get; set; } = null!;
         public ICollection<BookCategory> Categories { get; set; } = new List<BookCategory>();
+        public ICollection<BookCopy> Copies { get; set; } = new List<BookCopy>();
     }
 }

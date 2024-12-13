@@ -1,0 +1,61 @@
+﻿@model CreateBookCopyViewModel 
+
+@{
+	ViewData["Title"] = "Add New Copy";
+}
+
+<div class="row p-4">
+
+	<div class="col-3" style="background:#eee;"></div>
+
+	<div class="col-9">
+		<div class="card">
+			<div class="card-header">
+				<h6 class="card-title my-2">Add New Copy</h6>
+			</div>
+			<div class="card-body">
+				<form method="post" asp-action="Create" asp-controller="BookCopies">
+					<div class="form-group my-2">
+						<input type="number" asp-for="BookId" class="form-control my-2" hidden />
+					</div>
+					<div class="form-group my-2">
+						<input type="number" asp-for="EditionNumber" class="form-control my-2" placeholder="Edition Number..." />
+						<span asp-validation-for="EditionNumber" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						@if (Model.ShowForRental)
+						{
+							<select asp-for="IsAvailableForRental" class="form-select select2" aria-label="Default select example">
+								<option [value]="" selected>-- Is Available For Rental --</option>
+								<option [value]="true">True</option>
+								<option [value]="false">False</option>
+							</select>
+							<span asp-validation-for="IsAvailableForRental" class="text-danger"></span>
+						}
+					</div>
+					<div class="form-group my-2">
+						<button type="submit" class="btn btn-primary d-block ms-auto my-2">
+							<i class="bi bi-check-lg"></i> Save
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+@if (TempData["successmessage"] != null)
+{
+	@section Scripts2 {
+		<script>
+			$(document).ready(function(){
+				SweetAlertMessage();
+				ApplySelect2();
+			})
+		</script>
+	}
+}

@@ -9,3 +9,15 @@ global using Bookify.Core.IRepositories.Non_Generic;
 global using Bookify.DataAccess.Repositories.Generic;
 global using Bookify.Core.IUnit;
 global using Bookify.DataAccess.Repositories.Non_Generic;
+global using Bookify.Entities.Enums;
+global using System.Linq.Expressions;
+global using Bookify.Entities.entities.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;
+global using Bookify.DataAccess.constants;
+global using Bookify.Shared.Interfaces;
+global using Microsoft.AspNetCore.Http;
+global using System.Security.Claims;
+global using Bookify.Core.ViewModels.Dashboard.Responses;
+global using Bookify.Core.ViewModels.Book.Responses;
+ 

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bookify</title>
+    <link rel="stylesheet" href="~/bootstrapwatch/bootstrap.min (3).css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css"/>
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Satisfy&display=swap" rel="stylesheet">
+    <!--Animate Css file-->
+    <link  rel="stylesheet" href="~/lib/animate.css/animate.min.css" />
+    
+    <!--Toastr css files-->
+	<link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
+
+    <!--Add Sweetalert2 css Package link-->
+	<link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+    <!--Add DataTables CSS Files-->
+    <link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="~/lib/datatables.net-buttons-bs5/buttons.bootstrap5.min.css" rel="stylesheet" /> <!--Belong to Buttons of DataTables-->
+
+    <!--Add Select2 Library CSS File-->
+
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+
+    <!-- Add ApexCharts CSS File-->
+    <link rel="stylesheet" href="~/lib/apexcharts/apexcharts.min.css"/>
+
+    <!--Add flatpickr package CSS File-->
+
+    <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css"/>
+
+    @await RenderSectionAsync(name: "Styles",required: false)
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/Bookify.styles.css" asp-append-version="true" /> *@
+
+
+</head>
+<body>
+     <noscript>
+         <div class="position-fixed text-center bg-white h-100 w-100 p-4" style="z-index:30000000;">
+             <h3 class="text-danger fw-bold my-2">JavaScript is Disabled</h3>
+             <p class="text-muted my-2">PLease allow browser to use JavaScript and reload the Page again</p>
+         </div>
+    </noscript>
+    <partial name="_NavBarPartial"/>
+    
+    <div class="container animate__animated animate__fadeInTopLeft">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+     <partial name="_FooterPartial"/>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Add Bootbox js Package link-->
+	<script src="~/lib/bootbox.js/bootbox.min.js"></script>
+
+    <!--Add Toastr js Package link-->
+	<script src="~/lib/toastr.js/toastr.min.js"></script>
+
+    <!--Add Sweetalert2 js Package link-->
+	<script src="~/lib/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <!--Add Select2 Library Js File-->
+
+    <script src="~/lib/select2/js/select2.min.js"></script>
+
+    <!--Add flatPicker Package Js File-->
+
+    <script src="~/lib/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Add ApexCharts JS File-->
+
+    <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+
+    @await RenderSectionAsync("CustomScripts",required: false);
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts2", required: false)
+    
+</body>
+</html>

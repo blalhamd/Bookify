@@ -2,5 +2,6 @@
 {
 	public interface ICategoryRepositoryAsync : IGenericRepositoryAsync<Category>
 	{
+		Task<bool> IsCategoryExist(string name);
 	}
 }

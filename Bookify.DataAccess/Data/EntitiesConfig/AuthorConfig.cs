@@ -1,6 +1,6 @@
 ﻿namespace Bookify.DataAccess.Data.EntitiesConfig
 {
-	public class AuthorConfig : IEntityTypeConfiguration<Author>
+    public class AuthorConfig : IEntityTypeConfiguration<Author>
 	{
 		public void Configure(EntityTypeBuilder<Author> builder)
 		{

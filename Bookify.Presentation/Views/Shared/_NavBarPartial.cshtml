@@ -1,0 +1,80 @@
+﻿@using System.Security.Claims
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light fw-bold bg-primary border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            @if (!User.Identity!.IsAuthenticated)
+            {
+                <a class="navbar-brand" href="#"><img src="~/assets/images/Instruction manual-cuate.png" width="50" height="50" /></a>
+            }
+            else
+            {
+              <a class="navbar-brand" style="margin-left:30px" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/images/Instruction manual-cuate.png" width="50" height="50" /></a>
+            }
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Index"><i class="bi bi-house"></i> Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Index"><i class="bi bi-tags"></i> Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Authors" asp-action="Index"><i class="bi bi-people"></i> Authors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="Index"><i class="bi bi-book"></i> Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Subscribers" asp-action="Index"><i class="bi bi-envelope"></i> Subscribers</a>
+                        </li>
+                       
+                        @if (User.IsInRole(DefaultRole.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="Index"><i class="bi bi-person"></i> Users</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Search" asp-action="Index"><i class="bi bi-search"></i> Search</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav">
+                   
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link text-light">Hello @User.FindFirstValue(ClaimTypes.GivenName)</span>
+                        </li>
+@*                         <li class="nav-item">
+                    <span class="nav-link text-light">Hello @User.Identity.Name</span>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/LogOut">LogOut</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

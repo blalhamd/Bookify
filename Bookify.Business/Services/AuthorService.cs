@@ -4,66 +4,100 @@
 	{
 		private readonly IUnitOfWorkAsync _unitOfWork;
 		private readonly IMapper _mapper;
-		public AuthorService(IUnitOfWorkAsync unitOfWork, IMapper mapper)
+		private readonly ILoggerService _loggerService;
+		public AuthorService(IUnitOfWorkAsync unitOfWork, IMapper mapper, ILoggerService loggerService)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
+			_loggerService = loggerService;
 		}
 
 		public async Task<IList<AuthorViewModel>> GetAllAsync()
 		{
-			var categories = await _unitOfWork._AuthorRepositoryAsync.GetAllAsync();
+			_loggerService.LogInfo("Fetching all authors.");
 
-			if (categories is null)
+			var authors = await _unitOfWork._AuthorRepositoryAsync.GetAllAsync();
+
+			if (authors is null)
+			{
+				_loggerService.LogWarning("No authors found.");
 				throw new Exception();
+			}
 
-			var categoriesVm = _mapper.Map<IList<AuthorViewModel>>(categories);
+			var authorsVm = _mapper.Map<IList<AuthorViewModel>>(authors);
 
-			return categoriesVm;
+			_loggerService.LogInfo($"{authorsVm.Count} authors retrieved successfully.");
+
+			return authorsVm;
 		}
 
 		public async Task<AuthorViewModel> GetByIdAsync(int id)
 		{
+			_loggerService.LogInfo("Fetching author with ID: {ID}.",id);
+
 			var Author = await _unitOfWork._AuthorRepositoryAsync.GetByIdAsync(id);
 
 			if (Author is null)
-				throw new Exception();
+			{
+				_loggerService.LogWarning("Author with ID: {id} not found.",id);
+		    	throw new Exception();
+			}
 
 			var AuthorVm = _mapper.Map<AuthorViewModel>(Author);
+			_loggerService.LogInfo("Author with ID: {id} retrieved successfully.", id);
 
 			return AuthorVm;
 		}
 
 		public async Task CreateAsync(CreateAuthorViewModel model)
 		{
-			var Author = _mapper.Map<Author>(model);
+			_loggerService.LogInfo("Creating a new author.");
 
-			await _unitOfWork._AuthorRepositoryAsync.AddAsync(Author);
+			var author = _mapper.Map<Author>(model);
+
+			await _unitOfWork._AuthorRepositoryAsync.AddAsync(author);
 			await _unitOfWork.Save();
+
+			_loggerService.LogInfo("Author created successfully with ID {0}.", author.Id);
 		}
-		
+
 		public async Task UpdateAsync(int id, CreateAuthorViewModel model)
 		{
-			var Author = await _unitOfWork._AuthorRepositoryAsync.GetByIdAsync(id);
+			_loggerService.LogInfo("Updating author with ID {id}.", id);
 
-			if (Author is null)
+			var existingAuthor = await _unitOfWork._AuthorRepositoryAsync.GetByIdAsync(id);
+
+			if (existingAuthor is null)
+			{
+				_loggerService.LogWarning("Cannot update. Author with ID {id} not found.", id);
 				throw new Exception();
+			}
 
-			Author.Name = model.Name;
+			var UpdatedAuthor = _mapper.Map(model, existingAuthor);
 
-			await _unitOfWork._AuthorRepositoryAsync.UpdateAsync(Author);
+			await _unitOfWork._AuthorRepositoryAsync.UpdateAsync(UpdatedAuthor);
 			await _unitOfWork.Save();
+
+			_loggerService.LogInfo("Author with ID {0} updated successfully.", id);
 		}
 
 		public async Task DeleteAsync(int id)
 		{
+			_loggerService.LogInfo($"Deleting author with ID {id}.");
+
 			var Author = await _unitOfWork._AuthorRepositoryAsync.GetByIdAsync(id);
 
 			if (Author is null)
+			{
+				_loggerService.LogWarning("Cannot delete. Author with ID {id} not found.", id);
+
 				throw new Exception();
+			}
 
 			await _unitOfWork._AuthorRepositoryAsync.DeleteAsync(Author);
 			await _unitOfWork.Save();
+
+			_loggerService.LogInfo("Author with ID {id} deleted successfully.", id);
 		}
 
 	}

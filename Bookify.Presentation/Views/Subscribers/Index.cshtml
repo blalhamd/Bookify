@@ -1,0 +1,100 @@
+﻿@model IList<SubscriberViewModel>
+
+@{
+    ViewData["Title"] = "Subscribers";
+}
+
+<div class="row p-4 my-2">
+    <div class="col-12 p-4 text-end">
+        <a asp-action="CreateForm" asp-controller="Subscribers" class="btn btn-primary my-3">Add New Subscriber</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>National ID</th>
+                    <th>Has WhatsApp</th>
+                    <th>Area</th>
+                    <th>Governorate</th>
+                    <th>Address</th>
+                    <th>Is Blacklisted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subscriber in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            <img src="~/assets/images/@subscriber.ImageUrl" alt="Image" style=" border-radius: 80%; max-width: 50px; max-height: 50px;" />
+                        </td>
+                        <td>@subscriber.FirstName</td>
+                        <td>@subscriber.LastName</td>
+                        <td>@subscriber.Phone</td>
+                        <td>@subscriber.Email</td>
+                        <td>@subscriber.Gender</td>
+                        <td>@subscriber.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                        <td>@subscriber.NationalId</td>
+                        <td>@(subscriber.HasWhatsApp ? "Yes" : "No")</td>
+                        <td>@subscriber.AreaName</td>
+                        <td>@subscriber.GovernorateName</td>
+                        <td>@subscriber.Address</td>
+                        <td>@(subscriber.IsBlackListed ? "Yes" : "No")</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item active" asp-action="GetById" asp-controller="Subscribers" asp-route-id="@subscriber.Id"><i class="bi bi-eye-fill"></i> Details</a>
+                                    </li>
+                                    @if (User.IsInRole(DefaultRole.Admin))
+                                    {
+
+                                        <li>
+                                            <a class="dropdown-item" asp-action="EditForm" asp-controller="Subscribers" asp-route-id="@subscriber.Id"><i class="bi bi-box-arrow-in-down-left"></i> Update</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="dropdown-item js-toggle-status" data-url="/Subscribers/Delete/@subscriber.Id"><i class="bi bi-trash-fill"></i> Toggle Status</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        ApplyDataTables();
+    </script>
+}
+
+@section CustomScripts {
+    <partial name="_DataTablesJsScriptsPartial" />
+}
+
+@if (TempData["successmessage"] is not null)
+{
+    @section Scripts2 {
+    <script>
+        $(document).ready(function () {
+            SweetAlertMessage('@TempData["successmessage"]')
+            })
+        </script>
+    }
+}

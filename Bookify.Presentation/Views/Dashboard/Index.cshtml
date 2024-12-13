@@ -1,0 +1,140 @@
+﻿@model DashboardViewModel
+
+@{
+    ViewData["title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Content Section -->
+        <div id="main-content" class="col-12">
+            <div id="content-container" class="content p-3 position-relative">
+                <img src="~/assets/images/Dashbord/books-bg.webp" id="dash-main-image" class="img-fluid w-100" alt="Books Background" />
+                <div class="glass p-8 text-dark">
+                    <h2 id="bookify">Bookify</h2>
+                    <p>There ara Books That would like to read it!</p>
+                    <div class="d-flex justify-content-between">
+                        <p><i class="bi bi-book"></i> +@Model.BookCopiesCount Books</p>
+                        <p><i class="bi bi-envelope"></i> +@Model.SubscribersCount Members</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row p-4">
+        <!-- Top 8 Last Added Books -->
+        <div class="col-12">
+            <h2 class="text-center mb-4">Last Added Books</h2>
+        </div>
+        @if (Model.Books is not null)
+        {
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+                @foreach (var book in Model.Books)
+                {
+                    <div class="col">
+                        <div class="card h-100 shadow-sm custom-card">
+                            <img src="~/assets/images/@book.ImageUrl" class="img-fluid custom-img card-img-top" alt="@book.Title" />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@book.Title</h5>
+                                <p class="card-text"><strong>Author:</strong> @book.AuthorName</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No books available to display.</p>
+            </div>
+        }
+    </div>
+    <!--Dashboard for subscribers-->
+    <div class="row p-4">
+        <h4 class="text-center my-3">Subscribers Per City</h4>
+        <div>
+            <div id="chart">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+	<script>
+        // ApexCharts options
+        var options = {
+            chart: {
+                type: 'bar', // Change chart type to column (bar in ApexCharts)
+                height: 350,
+                toolbar: {
+                    show: true // Enable the chart toolbar
+                },
+                animations: {
+                    enabled: true, // Enable animations
+                    easing: 'easeinout',
+                    speed: 800
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false, // Ensure it's a vertical column chart
+                    columnWidth: '50%', // Adjust column width
+                    endingShape: 'rounded' // Round column edges
+                }
+            },
+            dataLabels: {
+                enabled: true, // Show data labels
+                style: {
+                    colors: ['#000'] // Customize label colors
+                }
+            },
+            series: [{
+                name: 'Count',
+                data: @Json.Serialize(Model.Subscribers?.Select(x => x.SubscribersCount))
+                        }],
+            xaxis: {
+                categories: @Json.Serialize(Model.Subscribers?.Select(x => x.City)),
+                title: {
+                    text: 'Cities'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Subscriber Count'
+                }
+            },
+            tooltip: {
+                enabled: true,
+                theme: 'light',
+                x: {
+                    show: true
+                },
+                y: {
+                    formatter: function (value) {
+                        return value + " subscribers"; // Customize tooltip text
+                    }
+                }
+            },
+            colors: ['#008FFB'], // Customize the column color
+            grid: {
+                borderColor: '#e7e7e7',
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // Alternate row colors
+                    opacity: 0.5
+                }
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'center'
+            }
+        };
+
+        // Initialize the chart
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+        // Render the chart
+        chart.render();
+    </script>
+}
